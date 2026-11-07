@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Finanzas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+<header class="encabezado-principal" id="encabezado-inicio">
+    <h1>Mis Finanzas 🌷</h1>
+    <p>¡Hola, Amelia! 💕</p>
+    <p>Bienvenida a tu espacio financiero.</p>
+    <p>Aquí puedes controlar tus ingresos, gastos y ahorros.</p>
+</header>
+
+<div class="resumen">
+    <button type="button" class="tarjeta" id="boton-saldo">
+        <h2>💰 Saldo disponible</h2>
+        <p id="total-saldo">$0</p>
+    </button>
+
+    <button type="button" class="tarjeta" id="boton-ingresos">
+        <h2>🌸 Ingresos</h2>
+        <p id="total-ingresos">$0</p>
+    </button>
+
+    <button type="button" class="tarjeta" id="boton-gastos">
+        <h2>🧾 Gastos</h2>
+        <p id="total-gastos">$0</p>
+    </button>
+
+    <button type="button" class="tarjeta" id="boton-ahorros">
+        <h2>🌿 Ahorros</h2>
+        <p id="total-ahorros">$0</p>
+    </button>
+</div>
+
+<section id="seccion-saldo" class="seccion-pantalla">
+    <button type="button" class ="boton-volver" onclick="volverAlInicio()">
+    ← Volver al inicio
+</button>
+
+    
+
+    <div class="tarjeta-saldo-detalle">
+        <h3>💰 Dinero disponible actualmente</h3>
+        <p id="detalle-saldo">$0</p>
+        <span>Este es tu saldo después de considerar tus movimientos.</span>
+    </div>
+
+    <div class="resumen-saldo">
+        <div class="tarjeta-resumen-saldo">
+            <h3>🌸 Ingresos</h3>
+            <p id="detalle-ingresos">$0</p>
+            <span>Dinero recibido</span>
+        </div>
+
+        <div class="tarjeta-resumen-saldo">
+            <h3>🧾 Gastos</h3>
+            <p id="detalle-gastos">$0</p>
+            <span>Dinero gastado</span>
+        </div>
+
+        <div class="tarjeta-resumen-saldo">
+            <h3>🌿 Ahorros</h3>
+            <p id="detalle-ahorros">$0</p>
+            <span>Dinero guardado</span>
+        </div>
+    </div>
+
+</section>
+
+<section id="seccion-ingresos" class="seccion-pantalla">
+<button type="button" class="boton-volver" onclick="volverAlInicio()">
+    ← Volver al inicio
+</button>
+
+<div class="encabezado-seccion encabezado-ingresos">
+    <span class="icono-seccion">🌸</span>
+    <h2>Mi espacio de ingresos</h2>
+    <p>Aquí puedes registrar el dinero que recibes y consultar cómo van tus ingresos.</p>
+</div>
+
+<h2>Registrar un ingreso</h2>
+
+<form id="formulario-ingreso">
+    <label for="concepto">Concepto del ingreso:</label>
+    <input
+        type="text"
+        id="concepto"
+        placeholder="Ej. Pago por contrato"
+        required
+    >
+
+    <label for="monto">Valor recibido (COP):</label>
+    <input
+        type="number"
+        id="monto"
+        min="1"
+        step="1"
+        placeholder="Ej. 250000"
+        required
+    >
+
+    <label for="fecha">Fecha del pago:</label>
+    <input
+        type="date"
+        id="fecha"
+        required
+    >
+
+    <button type="submit">Registrar ingreso</button>
+</form>
+
+<details class="historial-ingresos">
+
+   <summary>
+    💵 Historial de ingresos
+    (<span id="cantidad-movimientos-ingresos">0</span>)
+</summary>
+
+    <div class="filtros-ingresos">
+        <div>
+            <label for="filtro-mes-ingresos">Selecciona el mes:</label>
+            <select id="filtro-mes-ingresos">
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="filtro-anio-ingresos">Selecciona el año:</label>
+            <select id="filtro-anio-ingresos"></select>
+        </div>
+    </div>
+
+    <div class="resumen-mensual">
+        <h3>Total de ingresos del mes</h3>
+        <p id="total-ingresos-mes">$0</p>
+    </div>
+
+    <div class="tabla-contenedor">
+    <table id="tabla-ingresos">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Valor</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody id="lista-ingresos">
+        </tbody>
+    </table>
+</div>
+</details>
+</section>
+
+<section id="seccion-gastos-formulario" class="seccion-pantalla">
+<button type="button" class="boton-volver" onclick="volverAlInicio()">
+    ← Volver al inicio
+</button>
+
+<div class="encabezado-seccion encabezado-gastos">
+    <span class="icono-seccion">🌿</span>
+    <h2>Mi espacio de gastos</h2>
+    <p>Aquí puedes registrar tus gastos y consultar cómo administras tu dinero.</p>
+</div>
+
+<h2>Registrar un gasto</h2>
+<form id="formulario-gasto">
+    <label for="concepto-gasto">Concepto del gasto:</label>
+    <input
+        type="text"
+        id="concepto-gasto"
+        placeholder="Ej. Pago de servicios"
+        required
+    >
+    <label for="categoria-gasto">Categoría del gasto:</label>
+<select id="categoria-gasto" required>
+    <option value="">Selecciona una categoría</option>
+    <option value="Personales">Personales</option>
+    <option value="Alimentación">Alimentación</option>
+    <option value="Transporte">Transporte</option>
+    <option value="Horus">🐱 Horus</option>
+    <option value="Servicios">Servicios</option>
+    <option value="Otros">Otros</option>
+</select>
+
+<label for="origen-gasto">¿De dónde sale el dinero?</label>
+<select id="origen-gasto" required>
+    <option value="disponible">Saldo disponible</option>
+    <option value="ahorros">Ahorros</option>
+</select>
+
+    <label for="monto-gasto">Valor del gasto (COP):</label>
+    <input
+        type="number"
+        id="monto-gasto"
+        min="1"
+        step="1"
+        placeholder="Ej. 50000"
+        required
+    >
+
+    <label for="fecha-gasto">Fecha del gasto:</label>
+    <input type="date" id="fecha-gasto" required>
+
+    <button type="submit">Registrar gasto
+    </button>
+</form>
+
+<details class="historial-gastos">
+    <summary>
+        🧾 Historial de gastos
+        (<span id="cantidad-movimientos-gastos">0</span>)
+    </summary>
+
+    <div class="panel-historial-gastos">
+
+<div class="filtros-gastos">
+    <div>
+        <label for="filtro-mes">Selecciona el mes:</label>
+        <select id="filtro-mes">
+            <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+            <option value="5">Mayo</option>
+            <option value="6">Junio</option>
+            <option value="7">Julio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="filtro-anio">Selecciona el año:</label>
+        <select id="filtro-anio"></select>
+    </div>
+</div>
+<div class="resumen-mensual">
+    <h3>Total de gastos del mes</h3>
+    <p id="total-gastos-mes">$0</p>
+</div>
+<div class="resumen-categorias">
+    <h3>Gastos por categoría</h3>
+
+    <div id="lista-gastos-categorias">
+    </div>
+</div>
+</div>
+</details>
+</section>
+
+<section id="seccion-ahorros" class="seccion-pantalla">
+<button type="button" class="boton-volver" onclick="volverAlInicio()">
+    ← Volver al inicio
+</button>
+
+<div class="encabezado-seccion encabezado-ahorros">
+    <span class="icono-seccion">🪻</span>
+    <h2>Mi espacio de ahorros</h2>
+    <p>Aquí puedes registrar tus ahorros, consultar tus movimientos y ver cómo crece tu dinero.</p>
+</div>
+
+<h2>Registrar un ahorro</h2>
+
+<form id="formulario-ahorro">
+    <label for="concepto-ahorro">Concepto del ahorro:</label>
+    <input
+        type="text"
+        id="concepto-ahorro"
+        placeholder="Ej. Ahorro de octubre"
+        required
+    >
+
+    <label for="monto-ahorro">Valor del ahorro (COP):</label>
+    <input
+        type="number"
+        id="monto-ahorro"
+        min="1"
+        step="1"
+        placeholder="Ej. 50000"
+        required
+    >
+
+    <label for="fecha-ahorro">Fecha del ahorro:</label>
+    <input
+        type="date"
+        id="fecha-ahorro"
+        required
+    >
+
+    <button type="submit">Guardar ahorro</button>
+</form>
+
+<div class="resumen-ahorros-mes">
+    <h3>💰 Resumen de ahorros del mes</h3>
+
+    <div class="tarjetas-ahorros-mes">
+
+        <div class="tarjeta-ahorro-mes">
+            <h4>💵 Dinero ahorrado</h4>
+            <p id="total-depositos-mes">$0</p>
+        </div>
+
+        <div class="tarjeta-ahorro-mes">
+            <h4>💸 Dinero retirado</h4>
+            <p id="total-retiros-mes">$0</p>
+        </div>
+
+        <div class="tarjeta-ahorro-mes tarjeta-balance">
+            <h4>✨ Balance del mes</h4>
+            <p id="balance-ahorros-mes">$0</p>
+        </div>
+
+    </div>
+</div>
+
+<details class="historial-ahorros">
+    <summary>💰 Historial de ahorros</summary>
+    <div id="lista-ahorros"></div>
+</details>
+
+<h2>Mi vasito de monedas 🪙</h2>
+
+<div class="vasito-monedas">
+    <h3>Total acumulado en monedas</h3>
+    <p id="total-monedas">$0</p>
+
+    <form id="formulario-monedas">
+        <label for="monto-monedas">
+            Valor que agregaste (COP):
+        </label>
+
+        <input
+            type="number"
+            id="monto-monedas"
+            min="1"
+            step="1"
+            placeholder="Ej. 2600"
+            required
+        >
+
+        <label for="fecha-monedas">Fecha:</label>
+        <input
+            type="date"
+            id="fecha-monedas"
+            required
+        >
+
+        <button type="submit">Agregar monedas</button>
+    </form>
+
+    <details class="historial-monedas">
+    <summary>
+        <span>🪙 Historial de monedas (<span id="cantidad-movimientos-monedas">0</span>)</span>
+    </summary>
+
+    <div id="lista-monedas"></div>
+</details>
+</div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
